@@ -94,7 +94,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
         Mantén pulsado y arrastra hacia una zona del espectro
       </p>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-8">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {EMOTIONS.map((e) => (
           <div
             key={e.zone}
@@ -114,7 +114,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
                     title="Toca para quitar"
                     onClick={() => removePlacement(p.id)}
                   >
-                    <EmotionIcon zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
+                    <EmotionIcon zone={e.zone} className="h-16 w-16" emojiClassName="text-4xl" />
                   </button>
                 ))}
             </div>

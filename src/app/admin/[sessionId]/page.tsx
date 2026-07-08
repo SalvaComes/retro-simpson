@@ -208,7 +208,7 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
             </label>
           </div>
 
-          <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-8">
+          <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {EMOTIONS.map((e) => (
               <div key={e.zone} className="rounded-lg border p-2 text-center" style={{ borderColor: e.color }}>
                 <p className="mb-1 text-xs font-semibold" style={{ color: e.color }}>{e.label}</p>
@@ -217,7 +217,7 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                     .filter((p) => p.emotion_zone === e.zone)
                     .map((p) => (
                       <span key={p.id} title={session.checkin_anonymous ? "" : characterName(p.members?.character)}>
-                        <EmotionIcon zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
+                        <EmotionIcon zone={e.zone} className="h-16 w-16" emojiClassName="text-4xl" />
                       </span>
                     ))}
                 </div>
