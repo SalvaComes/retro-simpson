@@ -10,7 +10,7 @@ import {
   RETRO_COLUMNS,
   type Step,
 } from "@/lib/constants";
-import { CharacterPortrait, EmotionIcon, characterName } from "@/components/CharacterIcon";
+import { CharacterPortrait, characterName } from "@/components/CharacterIcon";
 import type {
   SessionRow,
   ChapterWithVotes,
@@ -217,7 +217,7 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                     .filter((p) => p.emotion_zone === e.zone)
                     .map((p) => (
                       <span key={p.id} title={session.checkin_anonymous ? "" : characterName(p.members?.character)}>
-                        <EmotionIcon zone={e.zone} className="h-16 w-16" emojiClassName="text-4xl" />
+                        <CharacterPortrait slug={p.members?.character} className="h-10 w-10" emojiClassName="text-2xl" />
                       </span>
                     ))}
                 </div>

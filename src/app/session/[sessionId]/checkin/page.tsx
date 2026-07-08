@@ -105,6 +105,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
             <span className="text-center text-xs font-semibold" style={{ color: e.color }}>
               {e.label}
             </span>
+            <EmotionIcon zone={e.zone} className="h-16 w-16" emojiClassName="text-4xl" />
             <div className="flex flex-wrap justify-center gap-1">
               {myPlacements
                 .filter((p) => p.emotion_zone === e.zone)
@@ -114,7 +115,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
                     title="Toca para quitar"
                     onClick={() => removePlacement(p.id)}
                   >
-                    <EmotionIcon zone={e.zone} className="h-16 w-16" emojiClassName="text-4xl" />
+                    <CharacterPortrait slug={character} className="h-10 w-10" emojiClassName="text-2xl" />
                   </button>
                 ))}
             </div>
