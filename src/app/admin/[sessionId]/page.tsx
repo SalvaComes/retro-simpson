@@ -10,7 +10,7 @@ import {
   RETRO_COLUMNS,
   type Step,
 } from "@/lib/constants";
-import { CharacterIcon, characterName } from "@/components/CharacterIcon";
+import { CharacterPortrait, EmotionIcon, characterName } from "@/components/CharacterIcon";
 import type {
   SessionRow,
   ChapterWithVotes,
@@ -216,8 +216,8 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                   {placements
                     .filter((p) => p.emotion_zone === e.zone)
                     .map((p) => (
-                      <span key={p.id} title={session.checkin_anonymous ? "" : p.members?.character || ""}>
-                        <CharacterIcon slug={p.members?.character} zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
+                      <span key={p.id} title={session.checkin_anonymous ? "" : characterName(p.members?.character)}>
+                        <EmotionIcon zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
                       </span>
                     ))}
                 </div>
@@ -279,7 +279,7 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                             <span className="flex items-center gap-1">
                               {!session.retro_anonymous && (
                                 <span title={characterName(i.members?.character)}>
-                                  <CharacterIcon slug={i.members?.character} className="h-5 w-5" emojiClassName="text-base" />
+                                  <CharacterPortrait slug={i.members?.character} className="h-5 w-5" emojiClassName="text-base" />
                                 </span>
                               )}
                               {i.content}

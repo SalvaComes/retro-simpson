@@ -69,24 +69,34 @@ El código usa emojis de marcador de posición (`src/lib/constants.ts`) para que
 todo funcione desde el primer momento.
 
 Para usar imágenes reales de la serie (para uso interno de equipo), debes
-conseguirlas tú mismo y colocarlas en:
+conseguirlas tú mismo. Hay dos conjuntos de imágenes **independientes**:
+
+**Retratos de personaje** (para el selector de personaje y para identificar
+al autor en la tabla retrospectiva cuando desactivas el anónimo) — una
+imagen fija por personaje, sin relación con el estado de ánimo:
 
 ```
-public/images/characters/{slug}/{zona-emocional}.png
+public/images/characters/{slug}.png
 ```
 
-Por ejemplo, para Homer en la zona 8 (Eufórico):
-`public/images/characters/homer/8.png`
+Por ejemplo, para Homer: `public/images/characters/homer.png`.
+Los `slug` disponibles están en `src/lib/constants.ts` (CHARACTERS).
 
-Los `slug` disponibles están en `src/lib/constants.ts` (CHARACTERS), y las
-8 zonas emocionales (1-8) en `EMOTIONS` del mismo archivo. El componente
-`src/components/CharacterIcon.tsx` ya sirve automáticamente la imagen de
-cada personaje/zona en toda la app (check-in, selector de personaje, panel
-de admin) — no hace falta tocar código. Si falta un archivo, muestra el
-emoji de marcador de posición en su lugar, así que puedes ir subiendo las
-imágenes poco a poco sin romper nada. Para el selector de personaje y para
-identificar autores en la tabla retrospectiva se usa siempre la imagen de
-la zona 4 (Neutral) como retrato del personaje.
+**Estados de ánimo del check-in** — genéricas e iguales para todos los
+personajes (no varían según quién las arrastre):
+
+```
+public/images/emotions/{zona-emocional}.png
+```
+
+Por ejemplo, para la zona 8 (Eufórico): `public/images/emotions/8.png`.
+Las 8 zonas (1-8) están en `EMOTIONS` en `src/lib/constants.ts`.
+
+El componente `src/components/CharacterIcon.tsx` (`CharacterPortrait` y
+`EmotionIcon`) sirve automáticamente cada imagen en toda la app — no hace
+falta tocar código. Si falta un archivo, muestra el emoji de marcador de
+posición en su lugar, así que puedes ir subiendo las imágenes poco a poco
+sin romper nada.
 
 ## 6. Cómo crear una retrospectiva el día del evento
 
