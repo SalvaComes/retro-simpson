@@ -2,15 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { isAdminAuthenticated } from "@/lib/adminAuth";
 
-// GET ?sessionId=...  -> todos los items (nunca se envía member_id al frontend
-// público; solo el admin lo necesitaría, y ni siquiera lo usa en pantalla)
+// GET ?sessionId=...  -> todos los items. Incluye el personaje del miembro
+// para que el admin pueda desanonimizar (retro_anonymous); el frontend
+// público de los miembros no lo muestra en pantalla.
 export async function GET(req: NextRequest) {
   const sessionId = req.nextUrl.searchParams.get("sessionId");
   if (!sessionId) return NextResponse.json({ error: "Falta sessionId" }, { status: 400 });
 
   const { data, error } = await supabaseAdmin
     .from("retro_items")
-    .select("*")
+    .select("*, members(character, display_name)")
     .eq("session_id", sessionId)
     .order("created_at", { ascending: true });
 

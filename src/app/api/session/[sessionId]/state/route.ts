@@ -45,6 +45,9 @@ export async function PATCH(
   if (typeof body.action_plan_anonymous === "boolean") {
     update.action_plan_anonymous = body.action_plan_anonymous;
   }
+  if (typeof body.retro_anonymous === "boolean") {
+    update.retro_anonymous = body.retro_anonymous;
+  }
   if (typeof body.is_active === "boolean") {
     update.is_active = body.is_active;
   }

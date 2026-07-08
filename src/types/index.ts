@@ -7,6 +7,7 @@ export interface SessionRow {
   current_step: Step;
   checkin_anonymous: boolean;
   action_plan_anonymous: boolean;
+  retro_anonymous: boolean;
   is_active: boolean;
 }
 

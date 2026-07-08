@@ -17,6 +17,7 @@ create table sessions (
   current_step text not null default 'icebreaker',
   checkin_anonymous boolean not null default true,
   action_plan_anonymous boolean not null default true,
+  retro_anonymous boolean not null default true,
   is_active boolean not null default true
 );
 
@@ -68,7 +69,8 @@ create table checkin_placements (
 );
 
 -- ------------------------------------------------------------
--- RETRO: tabla estándar (bien / mal / mejorar), siempre anónima en pantalla
+-- RETRO: tabla estándar (bien / mal / mejorar). Anónima por defecto en
+-- pantalla; el admin puede desanonimizarla con retro_anonymous en sessions.
 -- column_type: 'good' | 'bad' | 'improve'
 -- ------------------------------------------------------------
 create table retro_items (
@@ -138,3 +140,9 @@ create policy "public read icebreaker_votes" on icebreaker_votes for select usin
 create policy "public read checkin_placements" on checkin_placements for select using (true);
 create policy "public read retro_items" on retro_items for select using (true);
 create policy "public read action_items" on action_items for select using (true);
+
+-- ------------------------------------------------------------
+-- MIGRACIÓN: si tu proyecto de Supabase ya estaba desplegado antes de
+-- que existiera retro_anonymous, ejecuta solo esta línea en el SQL Editor:
+-- ------------------------------------------------------------
+-- alter table sessions add column if not exists retro_anonymous boolean not null default true;

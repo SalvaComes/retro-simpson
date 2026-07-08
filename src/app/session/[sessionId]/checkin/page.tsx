@@ -76,13 +76,17 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
         <div
           className="drag-avatar flex h-16 w-16 select-none items-center justify-center rounded-full bg-simpsonYellow text-3xl shadow"
           onPointerDown={(e) => {
+            e.currentTarget.setPointerCapture(e.pointerId);
             draggingRef.current = true;
             setGhostPos({ x: e.clientX, y: e.clientY });
           }}
           onPointerMove={(e) => {
             if (draggingRef.current) setGhostPos({ x: e.clientX, y: e.clientY });
           }}
-          onPointerUp={(e) => handlePointerUp(e.clientX, e.clientY)}
+          onPointerUp={(e) => {
+            e.currentTarget.releasePointerCapture(e.pointerId);
+            handlePointerUp(e.clientX, e.clientY);
+          }}
         >
           {characterEmoji(character)}
         </div>
