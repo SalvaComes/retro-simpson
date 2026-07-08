@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getOrCreateMemberId, storeCharacter } from "@/lib/memberId";
 import { StepGuard } from "@/components/StepGuard";
 import { CHARACTERS, type CharacterSlug } from "@/lib/constants";
+import { CharacterIcon } from "@/components/CharacterIcon";
 
 function CharacterSelectContent({ sessionId }: { sessionId: string }) {
   const memberId = getOrCreateMemberId(sessionId);
@@ -42,7 +43,7 @@ function CharacterSelectContent({ sessionId }: { sessionId: string }) {
                 : "border-simpsonBrown/20 bg-white hover:border-simpsonYellow"
             }`}
           >
-            <span className="text-4xl">{c.placeholder}</span>
+            <CharacterIcon slug={c.slug} className="h-16 w-16" emojiClassName="text-4xl" />
             <span className="text-sm font-medium">{c.name}</span>
           </button>
         ))}

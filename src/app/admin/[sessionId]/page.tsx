@@ -8,9 +8,9 @@ import {
   STEP_LABELS,
   EMOTIONS,
   RETRO_COLUMNS,
-  CHARACTERS,
   type Step,
 } from "@/lib/constants";
+import { CharacterIcon, characterName } from "@/components/CharacterIcon";
 import type {
   SessionRow,
   ChapterWithVotes,
@@ -25,14 +25,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-function characterEmoji(slug: string | null | undefined) {
-  return CHARACTERS.find((c) => c.slug === slug)?.placeholder || "❓";
-}
-
-function characterName(slug: string | null | undefined) {
-  return CHARACTERS.find((c) => c.slug === slug)?.name || "Sin personaje";
-}
 
 export default function AdminSessionPage({ params }: { params: { sessionId: string } }) {
   const { sessionId } = params;
@@ -224,8 +216,8 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                   {placements
                     .filter((p) => p.emotion_zone === e.zone)
                     .map((p) => (
-                      <span key={p.id} title={session.checkin_anonymous ? "" : p.members?.character || ""} className="text-xl">
-                        {characterEmoji(p.members?.character)}
+                      <span key={p.id} title={session.checkin_anonymous ? "" : p.members?.character || ""}>
+                        <CharacterIcon slug={p.members?.character} zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
                       </span>
                     ))}
                 </div>
@@ -284,10 +276,10 @@ export default function AdminSessionPage({ params }: { params: { sessionId: stri
                           </div>
                         ) : (
                           <div className="flex items-center justify-between gap-2">
-                            <span>
+                            <span className="flex items-center gap-1">
                               {!session.retro_anonymous && (
-                                <span className="mr-1" title={characterName(i.members?.character)}>
-                                  {characterEmoji(i.members?.character)}
+                                <span title={characterName(i.members?.character)}>
+                                  <CharacterIcon slug={i.members?.character} className="h-5 w-5" emojiClassName="text-base" />
                                 </span>
                               )}
                               {i.content}

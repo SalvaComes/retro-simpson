@@ -4,12 +4,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { getOrCreateMemberId, getStoredCharacter } from "@/lib/memberId";
 import { supabase } from "@/lib/supabaseClient";
 import { StepGuard } from "@/components/StepGuard";
-import { EMOTIONS, CHARACTERS } from "@/lib/constants";
+import { EMOTIONS } from "@/lib/constants";
+import { CharacterIcon } from "@/components/CharacterIcon";
 import type { CheckinPlacementRow } from "@/types";
-
-function characterEmoji(slug: string | null) {
-  return CHARACTERS.find((c) => c.slug === slug)?.placeholder || "❓";
-}
 
 function CheckinContent({ sessionId }: { sessionId: string }) {
   const memberId = getOrCreateMemberId(sessionId);
@@ -67,7 +64,9 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
 
   return (
     <main className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-1 text-2xl font-bold text-simpsonBlue">¿Cómo te sientes hoy? {characterEmoji(character)}</h1>
+      <h1 className="mb-1 flex items-center gap-2 text-2xl font-bold text-simpsonBlue">
+        ¿Cómo te sientes hoy? <CharacterIcon slug={character} className="h-8 w-8" emojiClassName="text-2xl" />
+      </h1>
       <p className="mb-6 text-simpsonBrown/70">
         Arrastra tu icono a las zonas que representen cómo te sientes. Puedes poner varios, incluso repetidos en la misma zona.
       </p>
@@ -88,7 +87,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
             handlePointerUp(e.clientX, e.clientY);
           }}
         >
-          {characterEmoji(character)}
+          <CharacterIcon slug={character} className="h-12 w-12" emojiClassName="text-3xl" />
         </div>
       </div>
       <p className="mb-6 text-center text-xs text-simpsonBrown/50">
@@ -114,9 +113,8 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
                     key={p.id}
                     title="Toca para quitar"
                     onClick={() => removePlacement(p.id)}
-                    className="text-xl"
                   >
-                    {characterEmoji(character)}
+                    <CharacterIcon slug={character} zone={e.zone} className="h-8 w-8" emojiClassName="text-xl" />
                   </button>
                 ))}
             </div>
@@ -126,10 +124,10 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
 
       {ghostPos && (
         <div
-          className="pointer-events-none fixed z-50 text-4xl"
+          className="pointer-events-none fixed z-50"
           style={{ left: ghostPos.x - 20, top: ghostPos.y - 20 }}
         >
-          {characterEmoji(character)}
+          <CharacterIcon slug={character} className="h-10 w-10" emojiClassName="text-4xl" />
         </div>
       )}
 

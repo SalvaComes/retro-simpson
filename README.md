@@ -78,9 +78,15 @@ public/images/characters/{slug}/{zona-emocional}.png
 Por ejemplo, para Homer en la zona 8 (Eufórico):
 `public/images/characters/homer/8.png`
 
-Los `slug` disponibles están en `src/lib/constants.ts` (CHARACTERS).
-Después, sustituye el emoji en `characterEmoji()` (en las páginas de
-check-in y del panel admin) por un `<img src={`/images/characters/${slug}/${zone}.png`} />`.
+Los `slug` disponibles están en `src/lib/constants.ts` (CHARACTERS), y las
+8 zonas emocionales (1-8) en `EMOTIONS` del mismo archivo. El componente
+`src/components/CharacterIcon.tsx` ya sirve automáticamente la imagen de
+cada personaje/zona en toda la app (check-in, selector de personaje, panel
+de admin) — no hace falta tocar código. Si falta un archivo, muestra el
+emoji de marcador de posición en su lugar, así que puedes ir subiendo las
+imágenes poco a poco sin romper nada. Para el selector de personaje y para
+identificar autores en la tabla retrospectiva se usa siempre la imagen de
+la zona 4 (Neutral) como retrato del personaje.
 
 ## 6. Cómo crear una retrospectiva el día del evento
 
