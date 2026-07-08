@@ -1,7 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { CHARACTERS, EMOTIONS } from "@/lib/constants";
+
+// Evita que el navegador inicie su propio drag-and-drop nativo sobre la
+// imagen, lo cual interrumpe el drag-and-drop personalizado del check-in.
+const NO_NATIVE_DRAG: CSSProperties = { WebkitUserDrag: "none" } as CSSProperties;
 
 export function characterEmoji(slug: string | null | undefined) {
   return CHARACTERS.find((c) => c.slug === slug)?.placeholder || "❓";
@@ -39,6 +43,8 @@ export function CharacterPortrait({
       src={`/images/characters/${slug}.png`}
       alt={characterName(slug)}
       className={`${className} object-contain`}
+      draggable={false}
+      style={NO_NATIVE_DRAG}
       onError={() => setErrored(true)}
     />
   );
@@ -68,6 +74,8 @@ export function EmotionIcon({
       src={`/images/emotions/${zone}.png`}
       alt={EMOTIONS.find((e) => e.zone === zone)?.label || "Emoción"}
       className={`${className} object-contain`}
+      draggable={false}
+      style={NO_NATIVE_DRAG}
       onError={() => setErrored(true)}
     />
   );
