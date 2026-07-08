@@ -31,14 +31,14 @@ export type CharacterSlug = (typeof CHARACTERS)[number]["slug"];
 // El campo "zone" es el valor 1-8 que se guarda en checkin_placements.
 // ============================================================
 export const EMOTIONS = [
-  { zone: 1, label: "Muy triste", color: "#5B6B8C", emoji: "😢" },
+  { zone: 1, label: "Enfadado", color: "#5B6B8C", emoji: "😠" },
   { zone: 2, label: "Triste", color: "#7A8CB0", emoji: "😔" },
   { zone: 3, label: "Estresado", color: "#D6622A", emoji: "😖" },
   { zone: 4, label: "Neutral", color: "#B8A46A", emoji: "😐" },
   { zone: 5, label: "Contento", color: "#8FBF5A", emoji: "🙂" },
   { zone: 6, label: "Feliz", color: "#5FBF6E", emoji: "😊" },
   { zone: 7, label: "Muy feliz", color: "#3FBF8E", emoji: "😄" },
-  { zone: 8, label: "Eufórico", color: "#FED90F", emoji: "🤩" },
+  { zone: 8, label: "Ilusionado", color: "#FED90F", emoji: "🤩" },
 ] as const;
 
 export const RETRO_COLUMNS = [
