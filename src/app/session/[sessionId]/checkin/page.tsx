@@ -95,7 +95,7 @@ function CheckinContent({ sessionId }: { sessionId: string }) {
         {EMOTIONS.map((e) => (
           <div
             key={e.zone}
-            ref={(el) => (zoneRefs.current[e.zone] = el)}
+            ref={(el) => { zoneRefs.current[e.zone] = el; }}
             className="drop-zone flex flex-col items-center justify-start gap-1 p-2"
             style={{ borderColor: e.color }}
           >
